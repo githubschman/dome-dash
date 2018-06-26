@@ -1,20 +1,60 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="dome-dash-container">
+  <div class="game-container" *ngIf="gameStarted && !gameOver">
+    <div class="order-container">
+      <h1>Dome Dash!</h1>
+      dome dash
+      completed orders: {{ completedOrders - 1 }} and
+      failed orders: {{ getMissedOrders() }}
+      <div *ngIf="dogOrdering">
+        <h1> BARK I AM A ROBODOG GIVE ME A BONE!! </h1> {{ dogTime }}
+      </div>
+      <div *ngFor="let order of orders">
+        <div *ngIf="!order.expired && !order.completed">
+          <h3>
+            I want a... {{ order.base }} with {{ order.sauce }} and {{ order.spice }}
+            {{  (order.time - now) / 1000 }}
+            <button (click)="serveDish(order)">serve</button>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="staging">
+      <h4>
+        {{ stage.base || '---' }}
+        {{ stage.sauce || '---' }}
+        {{ stage.spice || '---' }}
+      </h4>
+    </div>
+    <div class="work-space">
+      <div>
+        Bases:
+        <span *ngFor="let base of bases">
+          <button (click)="toggleIngredient('base', base)"> {{ base }} </button>
+        </span>
+      </div>
+      <div>
+        Sauces: 
+        <span *ngFor="let sauce of sauces">
+          <button (click)="toggleIngredient('sauce', sauce)"> {{ sauce }} </button>
+        </span>
+      </div>
+      <div>
+        Spices:
+        <span *ngFor="let spice of spices">
+          <button (click)="toggleIngredient('spice', spice)"> {{ spice }} </button>
+        </span>
+      </div>
+      <div>
+        <button (click)="giveBone()"> BONE </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!gameStarted">
+    <h1> Play Dome Dash!! </h1>
+  </div>
+  <button *ngIf="!gameStarted" (click)="startGame()"> start game </button>
+  <div *ngIf="gameOver">
+    GAME OVER!
+    You fed {{ completedOrders - 1 }} dome dwellers
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-

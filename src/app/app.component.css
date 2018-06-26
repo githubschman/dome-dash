@@ -1,0 +1,13 @@
+.dome-dash-container {
+    text-align: center;
+    color: grey;
+}
+
+.order-container {
+    height: 300px;
+}
+
+button {
+    width: 150px;
+    height: 50px;
+}
